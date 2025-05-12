@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL") // Example: "file:./dev.db"
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  year      Int
+  month     Int
+  country   String
+  visitors  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([year, month, country])
+  @@index([year, month])
+  @@index([country])
+}
+
+model FxRate {
+  id            String   @id @default(cuid())
+  currencyPair  String   // e.g., "USDJPY"
+  year          Int
+  month         Int
+  fxRate        Float    // Monthly average rate
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([currencyPair, year, month])
+  @@index([currencyPair, year, month])
+}

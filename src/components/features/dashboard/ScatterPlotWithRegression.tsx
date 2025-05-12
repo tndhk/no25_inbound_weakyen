@@ -54,8 +54,12 @@ export default async function ScatterPlotWithRegression({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>為替変動 vs 訪日客数伸び率 ({country}, {currencyPair})</CardTitle>
-        <CardDescription>過去{numberOfMonths}ヶ月間の散布図と回帰分析</CardDescription>
+        <CardTitle>為替変動と訪日客数伸び率の相関 ({country}, {currencyPair})</CardTitle>
+        <CardDescription>
+          過去{numberOfMonths}ヶ月間の月次データを使用。
+          横軸: 為替変動率(%)、縦軸: 訪日客数伸び率(%)。
+          オレンジの線は回帰直線を示します。
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ScatterPlotClient
